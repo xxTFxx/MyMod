@@ -1,0 +1,16 @@
+{
+    "type": "minecraft:crafting_shaped",
+    "pattern": [
+        "XXX",
+        "XXX",
+        "XXX"
+    ],
+    "key": {
+        "X": {
+            "item": "siberianadv:stalinium_ingot"
+        }
+    },
+    "result": {
+        "item": "siberianadv:stalinium_block"
+    }
+}

@@ -1,0 +1,8 @@
+{
+    "music.soviet_anthem": 
+    {
+        "category": "record",
+        "subtitle": "music.soviet_anthem",
+        "sounds": [ { "name": "siberianadv:music/soviet_anthem", "stream": true } ]
+    }
+}

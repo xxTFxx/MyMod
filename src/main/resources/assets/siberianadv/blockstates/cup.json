@@ -1,0 +1,11 @@
+{
+    "variants": 
+	{
+	    "normal": { "model": "siberianadv:cup"},
+        "facing=north": { "model": "siberianadv:cup"},
+        "facing=south": { "model": "siberianadv:cup", "y": 180 },
+        "facing=west":  { "model": "siberianadv:cup" , "y": 270 },
+        "facing=east":  { "model": "siberianadv:cup" , "y": 90 }
+        
+    }
+}

@@ -1,0 +1,11 @@
+{
+    "variants": 
+	{
+	    "normal": { "model": "siberianadv:barbedwire"},
+        "facing=north": { "model": "siberianadv:barbedwire"},
+        "facing=south": { "model": "siberianadv:barbedwire", "y": 180 },
+        "facing=west":  { "model": "siberianadv:barbedwire" , "y": 270 },
+        "facing=east":  { "model": "siberianadv:barbedwire" , "y": 90 }
+        
+    }
+}

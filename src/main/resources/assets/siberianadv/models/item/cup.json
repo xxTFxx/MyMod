@@ -1,0 +1,16 @@
+{
+    "parent": "siberianadv:block/cup",
+    "display":
+    {
+        "firstperson_righthand":
+        {
+            "translation": [0, 5, 0],
+            "scale": [0.6 , 0.6 , 0.6],
+            "rotation": [ 0, -25, 0 ]
+        },     
+        "gui": {
+            "translation": [0, 1, 0],
+            "rotation": [ 0, -25, 0 ]
+        }
+    }
+}

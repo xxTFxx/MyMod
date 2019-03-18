@@ -1,0 +1,11 @@
+{
+    "variants": 
+	{
+	    "normal": { "model": "siberianadv:photovoltaic_panel"},
+        "facing=north": { "model": "siberianadv:photovoltaic_panel", "y": 270},
+        "facing=south": { "model": "siberianadv:photovoltaic_panel", "y": 90 },
+        "facing=west":  { "model": "siberianadv:photovoltaic_panel", "y": 180 },
+        "facing=east":  { "model": "siberianadv:photovoltaic_panel"}
+        
+    }
+}

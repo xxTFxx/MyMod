@@ -1,0 +1,10 @@
+{
+    "forge_marker": 1,
+    "defaults": {
+        "model": "siberianadv:portable_generator"
+    },
+    "variants": {
+        "normal": [{}],
+        "inventory": [{}]
+    }
+}
