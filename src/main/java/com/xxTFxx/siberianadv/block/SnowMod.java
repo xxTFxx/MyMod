@@ -3,7 +3,7 @@ package com.xxTFxx.siberianadv.block;
 import java.util.Random;
 
 import com.xxTFxx.siberianadv.Main;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 
 import net.minecraft.block.Block;

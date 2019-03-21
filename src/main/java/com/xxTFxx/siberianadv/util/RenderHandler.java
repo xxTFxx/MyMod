@@ -3,7 +3,7 @@ package com.xxTFxx.siberianadv.util;
 import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.entity.EntitySiberiaMan;
 import com.xxTFxx.siberianadv.entity.render.RenderSiberiaMan;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.ItemMeshDefinition;
@@ -32,7 +32,7 @@ public class RenderHandler {
 	
 	public static void registerCustomMeshesAndStates()
 	{
-		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(ModBlocks.PETROLEUM_BLOCK), new ItemMeshDefinition() {
+		ModelLoader.setCustomMeshDefinition(Item.getItemFromBlock(BlockInit.PETROLEUM_BLOCK), new ItemMeshDefinition() {
 			
 			@Override
 			public ModelResourceLocation getModelLocation(ItemStack stack) {
@@ -40,7 +40,7 @@ public class RenderHandler {
 			}
 		});
 		
-		ModelLoader.setCustomStateMapper(ModBlocks.PETROLEUM_BLOCK, new StateMapperBase() {
+		ModelLoader.setCustomStateMapper(BlockInit.PETROLEUM_BLOCK, new StateMapperBase() {
 			
 			@Override
 			protected ModelResourceLocation getModelResourceLocation(IBlockState state) {

@@ -2,7 +2,7 @@ package com.xxTFxx.siberianadv.block.machines;
 
 import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.block.RotBlock;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 import com.xxTFxx.siberianadv.tileentity.TileEntityElectricFurnace_ITier;
 import com.xxTFxx.siberianadv.tileentity.TileEntitySimpleGenerator;
@@ -65,11 +65,11 @@ public class ElectricFurnace_ITier extends RotBlock{
 		
 		if(isActive)
 		{
-			worldIn.setBlockState(pos, ModBlocks.ELECTRIC_FURNACE_ITIER.getDefaultState().withProperty(BURNING, true) , 3);
+			worldIn.setBlockState(pos, BlockInit.ELECTRIC_FURNACE_ITIER.getDefaultState().withProperty(BURNING, true) , 3);
 		}
 		else
 		{
-			worldIn.setBlockState(pos, ModBlocks.ELECTRIC_FURNACE_ITIER.getDefaultState().withProperty(BURNING, false) , 3);
+			worldIn.setBlockState(pos, BlockInit.ELECTRIC_FURNACE_ITIER.getDefaultState().withProperty(BURNING, false) , 3);
 		}
 		
 		if(tile != null)

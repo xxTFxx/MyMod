@@ -1,6 +1,6 @@
 package com.xxTFxx.siberianadv.compat;
 
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;

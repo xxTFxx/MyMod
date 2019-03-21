@@ -2,7 +2,7 @@ package com.xxTFxx.siberianadv.tileentity;
 
 import com.xxTFxx.siberianadv.block.machines.PhotovoltaicPanel;
 import com.xxTFxx.siberianadv.energy.CustomEnergyStorage;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;

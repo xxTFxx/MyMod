@@ -1,6 +1,6 @@
 package com.xxTFxx.siberianadv.util;
 
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.init.ModItems;
 
 import net.minecraft.block.Block;
@@ -26,12 +26,13 @@ public class ModelRegistryHandler {
 		registerModel(ModItems.BEAR_MEAT_COOKED);
 		registerModel(ModItems.USHANKA);
 		
-		registerModel(Item.getItemFromBlock(ModBlocks.STALINIUM_BLOCK));
-		registerModel(Item.getItemFromBlock(ModBlocks.BARBEDWIRE));
-		registerModel(Item.getItemFromBlock(ModBlocks.BARBEDWIREFENCE));
-		registerModel(Item.getItemFromBlock(ModBlocks.CUP));
-		registerModel(Item.getItemFromBlock(ModBlocks.PHOTOVOLTAICPANEL_BLOCK));
-		registerModel(Item.getItemFromBlock(ModBlocks.ELECTRIC_FURNACE_ITIER));
+		registerModel(Item.getItemFromBlock(BlockInit.STALINIUM_BLOCK));
+		registerModel(Item.getItemFromBlock(BlockInit.BARBEDWIRE));
+		registerModel(Item.getItemFromBlock(BlockInit.BARBEDWIREFENCE));
+		registerModel(Item.getItemFromBlock(BlockInit.CUP));
+		registerModel(Item.getItemFromBlock(BlockInit.PHOTOVOLTAICPANEL_BLOCK));
+		registerModel(Item.getItemFromBlock(BlockInit.ELECTRIC_FURNACE_ITIER));
+		registerModel(Item.getItemFromBlock(BlockInit.PORTABLE_GENERATOR));
 		
 	}
 	private static void registerModel(Item item) {

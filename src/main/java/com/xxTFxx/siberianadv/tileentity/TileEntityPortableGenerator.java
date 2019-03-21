@@ -5,6 +5,7 @@ import javax.annotation.Nullable;
 import com.xxTFxx.siberianadv.energy.CustomEnergyStorage;
 import com.xxTFxx.siberianadv.gui.GUIPortableGenerator;
 import com.xxTFxx.siberianadv.init.FluidInit;
+import com.xxTFxx.siberianadv.util.ModSoundEvent;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
@@ -17,8 +18,10 @@ import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.SoundCategory;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.energy.CapabilityEnergy;
+import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTank;
@@ -41,12 +44,17 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 	private FluidTank tank = new FluidTank(FluidInit.PETROLEUM_FLUID, 0, 5000);
 	private int FLUID_DRAIN = 5;
 	private int ENERGY_GAIN = 100;
+	private int output = 100;
 	private boolean isTurned = false;
 	private boolean shouldUpdate = false;
 	
+	private EnumFacing facingNorth = (EnumFacing.NORTH);
+	private EnumFacing facingSouth = (EnumFacing.SOUTH);
+	private EnumFacing facingWest = (EnumFacing.WEST);
+	private EnumFacing facingEast = (EnumFacing.EAST);
+	
 	@Override
 	public void update() {
-		
 		
 		if(!handler.getStackInSlot(0).isEmpty())
 		{
@@ -72,6 +80,11 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 		{
 			if(tank.getFluidAmount() >= FLUID_DRAIN && storage.getEnergyStored() + ENERGY_GAIN <= storage.getMaxEnergyStored())
 			{
+				if(world.isRemote)
+				{
+					//world.playSound(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 100, true), pos, ModSoundEvent.SOVIET_ANTHEM, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					
+				}
 				shouldUpdate = true;
 				tank.drain(FLUID_DRAIN, true);
 				storage.addEnergy(ENERGY_GAIN);
@@ -86,7 +99,74 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 			sendUpdates();
 			shouldUpdate = false;
 		}
+		
+		sendEnergy();
+		
 	}
+	
+	private void sendEnergy() {
+		if(getEnergyStored() >= output)
+		{
+				if(getBlockMetadata() == 2)
+				{
+					TileEntity tile = world.getTileEntity(pos.offset(facingEast));
+					if(tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facingEast.getOpposite()))
+					{
+						IEnergyStorage handler = tile.getCapability(CapabilityEnergy.ENERGY, facingEast.getOpposite());
+						if(handler != null && handler.canReceive() && handler.getEnergyStored() + output <= handler.getMaxEnergyStored())
+						{
+							handler.receiveEnergy(output, false);
+							storage.consumeEnergy(output);
+						}
+						else return;
+					}
+				}
+				if(getBlockMetadata() == 0)
+				{
+					TileEntity tile = world.getTileEntity(pos.offset(facingWest));
+					if(tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facingWest.getOpposite()))
+					{
+						IEnergyStorage handler = tile.getCapability(CapabilityEnergy.ENERGY, facingWest.getOpposite());
+						if(handler != null && handler.canReceive() && handler.getEnergyStored() + output <= handler.getMaxEnergyStored())
+						{
+							handler.receiveEnergy(output, false);
+							storage.consumeEnergy(output);
+						}
+						else return;
+					}
+				}
+				if(getBlockMetadata() == 1)
+				{
+					TileEntity tile = world.getTileEntity(pos.offset(facingNorth));
+					if(tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facingNorth.getOpposite()))
+					{
+						IEnergyStorage handler = tile.getCapability(CapabilityEnergy.ENERGY, facingNorth.getOpposite());
+						if(handler != null && handler.canReceive() && handler.getEnergyStored() + output <= handler.getMaxEnergyStored())
+						{
+							handler.receiveEnergy(output, false);
+							storage.consumeEnergy(output);
+						}
+						else return;
+					}
+				}
+				if(getBlockMetadata() == 3)
+				{
+					TileEntity tile = world.getTileEntity(pos.offset(facingSouth));
+					if(tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facingSouth.getOpposite()))
+					{
+						IEnergyStorage handler = tile.getCapability(CapabilityEnergy.ENERGY, facingSouth.getOpposite());
+						if(handler != null && handler.canReceive() && handler.getEnergyStored() + output <= handler.getMaxEnergyStored())
+						{
+							handler.receiveEnergy(output, false);
+							storage.consumeEnergy(output);
+						}
+						else return;
+					}
+
+				}
+			}
+		sendUpdates();
+		}
 	
 	
 	public boolean isWorking()

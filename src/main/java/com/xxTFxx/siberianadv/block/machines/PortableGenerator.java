@@ -3,7 +3,7 @@ package com.xxTFxx.siberianadv.block.machines;
 import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.block.RotBlock;
 import com.xxTFxx.siberianadv.init.FluidInit;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 import com.xxTFxx.siberianadv.tileentity.TileEntityPortableGenerator;
 
@@ -32,17 +32,17 @@ import net.minecraftforge.fluids.FluidUtil;
 import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 import net.minecraftforge.fluids.capability.IFluidHandler;
 
-public class PortableGenerator extends Block{
+public class PortableGenerator extends RotBlock{
 	
-	//public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
+	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
 	public PortableGenerator(String name) {
-		super(Material.IRON);
-		setUnlocalizedName(Main.MOD_ID + "." + name);
-		setRegistryName(name);
-		setCreativeTab(ModTab.Mod_Tab);
-		setHardness(0.5F);
-		ModBlocks.blocks.add(this);
+		super(Material.IRON , name);
+		//setUnlocalizedName(Main.MOD_ID + "." + name);
+		//setRegistryName(name);
+		//setCreativeTab(ModTab.Mod_Tab);
+		//setHardness(0.5F);
+		//BlockInit.blocks.add(this);
 	}
 	
 	@Override
@@ -94,20 +94,25 @@ public class PortableGenerator extends Block{
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		TileEntity tileentity = worldIn.getTileEntity(pos);
 		
-		if(tileentity instanceof TileEntityPortableGenerator)
+		if(!worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10, true).isCreative())
 		{
-			TileEntityPortableGenerator tileEntityPortableGenerator = (TileEntityPortableGenerator)tileentity;
+			if(tileentity instanceof TileEntityPortableGenerator)
+			{
+				TileEntityPortableGenerator tileEntityPortableGenerator = (TileEntityPortableGenerator)tileentity;
+				
+				ItemStack itemstack = new ItemStack(Item.getItemFromBlock(this));
+				NBTTagCompound nbttagcompound = new NBTTagCompound();
+				nbttagcompound.setInteger("Energy", tileEntityPortableGenerator.getEnergyStored());
+				nbttagcompound.setInteger("Fuel", tileEntityPortableGenerator.getFluidAmount());            	
+				
+				itemstack.setTagCompound(nbttagcompound);
+				
+				spawnAsEntity(worldIn, pos, itemstack);
+				
+			}
 			
-			ItemStack itemstack = new ItemStack(Item.getItemFromBlock(this));
-            NBTTagCompound nbttagcompound = new NBTTagCompound();
-            nbttagcompound.setInteger("Energy", tileEntityPortableGenerator.getEnergyStored());
-            nbttagcompound.setInteger("Fuel", tileEntityPortableGenerator.getFluidAmount());            	
-
-            itemstack.setTagCompound(nbttagcompound);
-
-            spawnAsEntity(worldIn, pos, itemstack);
-
 		}
+		
 		super.breakBlock(worldIn, pos, state);
 	}
 	

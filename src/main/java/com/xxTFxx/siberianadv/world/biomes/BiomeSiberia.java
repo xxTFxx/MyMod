@@ -5,7 +5,7 @@ import java.util.Random;
 import com.xxTFxx.siberianadv.entity.EntitySiberiaBear;
 import com.xxTFxx.siberianadv.entity.EntitySiberiaMan;
 import com.xxTFxx.siberianadv.init.BiomeInit;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.world.gen.WorldGenTaiga3;
 
 import net.minecraft.block.state.IBlockState;

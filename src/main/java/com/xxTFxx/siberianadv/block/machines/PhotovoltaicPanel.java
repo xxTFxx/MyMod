@@ -2,7 +2,7 @@ package com.xxTFxx.siberianadv.block.machines;
 
 import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.block.RotBlock;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.tileentity.TileEntityPhotovoltaicPanel;
 
 import net.minecraft.block.SoundType;
@@ -25,7 +25,7 @@ public class PhotovoltaicPanel extends RotBlock{
 	
 	public PhotovoltaicPanel(String name) {
 		super(Material.IRON , SoundType.METAL, name, 1.0F);
-		ModBlocks.blocks.add(this);
+		BlockInit.blocks.add(this);
 
 
 	}

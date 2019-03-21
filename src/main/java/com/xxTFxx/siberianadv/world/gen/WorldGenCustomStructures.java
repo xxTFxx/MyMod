@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
 
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.world.biomes.BiomeSiberia;
 import com.xxTFxx.siberianadv.world.gen.generators.WorldGenStructure;
 

@@ -7,7 +7,7 @@ import com.xxTFxx.siberianadv.compat.OreDictionaryCompat;
 import com.xxTFxx.siberianadv.init.BiomeInit;
 import com.xxTFxx.siberianadv.init.EntityInit;
 import com.xxTFxx.siberianadv.init.FluidInit;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.init.ModItems;
 import com.xxTFxx.siberianadv.item.CoffeCup;
 import com.xxTFxx.siberianadv.item.ItemBase;
@@ -15,6 +15,7 @@ import com.xxTFxx.siberianadv.item.ItemModRecord;
 import com.xxTFxx.siberianadv.item.ItemModSword;
 import com.xxTFxx.siberianadv.materials.ModMaterials;
 import com.xxTFxx.siberianadv.network.PacketHandler;
+import com.xxTFxx.siberianadv.tabs.TEOilPump;
 import com.xxTFxx.siberianadv.tileentity.TileEntityElectricFurnace_ITier;
 import com.xxTFxx.siberianadv.tileentity.TileEntityEnergyStorage_ITier;
 import com.xxTFxx.siberianadv.tileentity.TileEntityInductionFurnace;
@@ -66,7 +67,7 @@ public class RegistryHandler {
 	
 	@SubscribeEvent
 	public static void registerBlocks(RegistryEvent.Register<Block> event) {
-		event.getRegistry().registerAll(ModBlocks.blocks.toArray(new Block[0]));
+		event.getRegistry().registerAll(BlockInit.blocks.toArray(new Block[0]));
 	}
 	
 	private static void registerTileEntities()
@@ -77,6 +78,8 @@ public class RegistryHandler {
 		GameRegistry.registerTileEntity(TileEntityEnergyStorage_ITier.class, new ResourceLocation(Main.MOD_ID + ":electric_storage_1"));
 		GameRegistry.registerTileEntity(TileEntityInductionFurnace.class, new ResourceLocation(Main.MOD_ID + ":induction_furnace"));
 		GameRegistry.registerTileEntity(TileEntityPortableGenerator.class, new ResourceLocation(Main.MOD_ID + ":portable_generator"));
+		GameRegistry.registerTileEntity(TEOilPump.class, new ResourceLocation(Main.MOD_ID + ":oil_pump"));
+
 
 	}
 	
@@ -96,17 +99,18 @@ public class RegistryHandler {
 		};
 		
 		final Item[] itemBlocks = {
-			new ItemBlock(ModBlocks.STALINIUM_BLOCK).setRegistryName(ModBlocks.STALINIUM_BLOCK.getRegistryName()),	
-			new ItemBlock(ModBlocks.BARBEDWIRE).setRegistryName(ModBlocks.BARBEDWIRE.getRegistryName()),
-			new ItemBlock(ModBlocks.BARBEDWIREFENCE).setRegistryName(ModBlocks.BARBEDWIREFENCE.getRegistryName()),
-			new ItemBlock(ModBlocks.CUP).setRegistryName(ModBlocks.CUP.getRegistryName()),
-			new ItemBlock(ModBlocks.SIMPLE_GENERATOR).setRegistryName(ModBlocks.SIMPLE_GENERATOR.getRegistryName()),
-			new ItemBlock(ModBlocks.ENERGYSTORAGE_ITIER).setRegistryName(ModBlocks.ENERGYSTORAGE_ITIER.getRegistryName()),
-			new ItemBlock(ModBlocks.PHOTOVOLTAICPANEL_BLOCK).setRegistryName(ModBlocks.PHOTOVOLTAICPANEL_BLOCK.getRegistryName()),
-			new ItemBlock(ModBlocks.ELECTRIC_FURNACE_ITIER).setRegistryName(ModBlocks.ELECTRIC_FURNACE_ITIER.getRegistryName()),
-			new ItemBlock(ModBlocks.INDUCTION_FURNACE).setRegistryName(ModBlocks.INDUCTION_FURNACE.getRegistryName()),
-			new ItemBlock(ModBlocks.PORTABLE_GENERATOR).setRegistryName(ModBlocks.PORTABLE_GENERATOR.getRegistryName()),
-			new ItemBlock(ModBlocks.PETROLEUM_BLOCK).setRegistryName(ModBlocks.PETROLEUM_BLOCK.getRegistryName()),
+			new ItemBlock(BlockInit.STALINIUM_BLOCK).setRegistryName(BlockInit.STALINIUM_BLOCK.getRegistryName()),	
+			new ItemBlock(BlockInit.BARBEDWIRE).setRegistryName(BlockInit.BARBEDWIRE.getRegistryName()),
+			new ItemBlock(BlockInit.BARBEDWIREFENCE).setRegistryName(BlockInit.BARBEDWIREFENCE.getRegistryName()),
+			new ItemBlock(BlockInit.CUP).setRegistryName(BlockInit.CUP.getRegistryName()),
+			new ItemBlock(BlockInit.SIMPLE_GENERATOR).setRegistryName(BlockInit.SIMPLE_GENERATOR.getRegistryName()),
+			new ItemBlock(BlockInit.ENERGYSTORAGE_ITIER).setRegistryName(BlockInit.ENERGYSTORAGE_ITIER.getRegistryName()),
+			new ItemBlock(BlockInit.PHOTOVOLTAICPANEL_BLOCK).setRegistryName(BlockInit.PHOTOVOLTAICPANEL_BLOCK.getRegistryName()),
+			new ItemBlock(BlockInit.ELECTRIC_FURNACE_ITIER).setRegistryName(BlockInit.ELECTRIC_FURNACE_ITIER.getRegistryName()),
+			new ItemBlock(BlockInit.INDUCTION_FURNACE).setRegistryName(BlockInit.INDUCTION_FURNACE.getRegistryName()),
+			new ItemBlock(BlockInit.PORTABLE_GENERATOR).setRegistryName(BlockInit.PORTABLE_GENERATOR.getRegistryName()),
+			new ItemBlock(BlockInit.PETROLEUM_BLOCK).setRegistryName(BlockInit.PETROLEUM_BLOCK.getRegistryName()),
+			new ItemBlock(BlockInit.OIL_PUMP).setRegistryName(BlockInit.OIL_PUMP.getRegistryName()),
 
 
 			//new ItemBlock(ModBlocks.SNOWM).setRegistryName(ModBlocks.SNOWM.getRegistryName())

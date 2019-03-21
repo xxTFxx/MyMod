@@ -13,6 +13,7 @@ import com.xxTFxx.siberianadv.block.machines.BlockEnergyStorage_ITier;
 import com.xxTFxx.siberianadv.block.machines.BlockSimpleGenerator;
 import com.xxTFxx.siberianadv.block.machines.ElectricFurnace_ITier;
 import com.xxTFxx.siberianadv.block.machines.InductionFurnace;
+import com.xxTFxx.siberianadv.block.machines.OilPump;
 import com.xxTFxx.siberianadv.block.machines.PhotovoltaicPanel;
 import com.xxTFxx.siberianadv.block.machines.PortableGenerator;
 
@@ -22,7 +23,7 @@ import net.minecraft.block.material.Material;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 //@ObjectHolder(Main.MOD_ID)
-public class ModBlocks {
+public class BlockInit {
 	public static final List<Block> blocks = new ArrayList<Block>();
 	
 	public static final Block STALINIUM_BLOCK = new BasicBlock(Material.IRON , SoundType.METAL , "stalinium_block" , 5.0F);
@@ -38,6 +39,8 @@ public class ModBlocks {
 	public static final Block ELECTRIC_FURNACE_ITIER = new ElectricFurnace_ITier("electric_furnace_1");
 	public static final Block INDUCTION_FURNACE = new InductionFurnace("induction_furnace");
 	public static final Block PORTABLE_GENERATOR = new PortableGenerator("portable_generator");
+	public static final Block OIL_PUMP = new OilPump("oil_pump");
+		
 	
 	//fluids
 	public static final Block PETROLEUM_BLOCK = new BlockFluid("petroleum", FluidInit.PETROLEUM_FLUID, Material.WATER);

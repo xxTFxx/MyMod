@@ -1,7 +1,7 @@
 package com.xxTFxx.siberianadv.block;
 
 import com.xxTFxx.siberianadv.Main;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ public class BlockFluid extends BlockFluidClassic{
 		setRegistryName(name);
 		setCreativeTab(ModTab.Mod_Tab);
 		
-		ModBlocks.blocks.add(this);
+		BlockInit.blocks.add(this);
 	}
 	
 	@Override

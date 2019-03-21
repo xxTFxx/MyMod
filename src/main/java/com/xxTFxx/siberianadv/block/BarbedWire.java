@@ -2,7 +2,7 @@ package com.xxTFxx.siberianadv.block;
 
 import java.util.Random;
 
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.init.ModItems;
 import com.xxTFxx.siberianadv.util.handlers.DamageSourceHandler;
 
@@ -41,7 +41,7 @@ public class BarbedWire extends BasicBlock{
 	public BarbedWire(String name) {
 		super(Material.ROCK, SoundType.METAL, name);
 		setHardness(20.0F);
-		ModBlocks.blocks.add(this);
+		BlockInit.blocks.add(this);
 	}
 	
 	@Override
@@ -127,7 +127,7 @@ public class BarbedWire extends BasicBlock{
 		
 
 		if(playerIn.getHeldItemMainhand().getItem() == ModItems.STALINIUM_INGOT) {
-			playerIn.addItemStackToInventory(new ItemStack(ModBlocks.BARBEDWIRE));
+			playerIn.addItemStackToInventory(new ItemStack(BlockInit.BARBEDWIRE));
 			worldIn.setBlockToAir(pos);
 			return true;
 		}

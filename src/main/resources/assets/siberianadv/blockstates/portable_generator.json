@@ -1,10 +1,11 @@
 {
-    "forge_marker": 1,
-    "defaults": {
-        "model": "siberianadv:portable_generator"
-    },
-    "variants": {
-        "normal": [{}],
-        "inventory": [{}]
+    "variants": 
+	{
+	    "normal": { "model": "siberianadv:portable_generator"},
+        "facing=north": { "model": "siberianadv:portable_generator"},
+        "facing=south": { "model": "siberianadv:portable_generator", "y": 180 },
+        "facing=west":  { "model": "siberianadv:portable_generator", "y": 270 },
+        "facing=east":  { "model": "siberianadv:portable_generator", "y": 90}
+        
     }
 }

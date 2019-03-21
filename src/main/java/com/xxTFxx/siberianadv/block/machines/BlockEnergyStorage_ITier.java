@@ -2,7 +2,7 @@ package com.xxTFxx.siberianadv.block.machines;
 
 import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.block.BasicBlock;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.tileentity.TileEntityEnergyStorage_ITier;
 
 import net.minecraft.block.material.Material;
@@ -24,7 +24,7 @@ public class BlockEnergyStorage_ITier extends BasicBlock{
 	
 	public BlockEnergyStorage_ITier(String name) {
 		super(Material.IRON , name);
-		ModBlocks.blocks.add(this);
+		BlockInit.blocks.add(this);
 	}
 	
 	@Override

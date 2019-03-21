@@ -1,7 +1,7 @@
 package com.xxTFxx.siberianadv.block;
 
 import com.xxTFxx.siberianadv.Main;
-import com.xxTFxx.siberianadv.init.ModBlocks;
+import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 
 import net.minecraft.block.Block;
@@ -27,9 +27,19 @@ public class RotBlock extends Block{
 		setRegistryName(name);
 		setUnlocalizedName(Main.MOD_ID + "." + name);
 		setCreativeTab(ModTab.Mod_Tab);
-		ModBlocks.blocks.add(this);
+		BlockInit.blocks.add(this);
 	}
 	
+	public RotBlock(Material materialIn, String name) {
+		super(materialIn);
+		setSoundType(SoundType.STONE);
+		setHardness(1.0F);
+		setRegistryName(name);
+		setUnlocalizedName(Main.MOD_ID + "." + name);
+		setCreativeTab(ModTab.Mod_Tab);
+		BlockInit.blocks.add(this);
+	}
+
 	@Override
 	public IBlockState getStateFromMeta(int meta)
 	  {
