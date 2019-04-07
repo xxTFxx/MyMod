@@ -1,7 +1,7 @@
 package com.xxTFxx.siberianadv.item;
 
 import com.xxTFxx.siberianadv.Main;
-import com.xxTFxx.siberianadv.init.ModItems;
+import com.xxTFxx.siberianadv.init.ItemInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 
 import net.minecraft.creativetab.CreativeTabs;

@@ -50,6 +50,11 @@ public class InductionFurnace extends RotBlock{
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		TileEntityInductionFurnace tileentity = (TileEntityInductionFurnace)worldIn.getTileEntity(pos);
 		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(0)));
+		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(1)));
+		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(2)));
+		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(3)));
+		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(4)));
+		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(5)));
 		super.breakBlock(worldIn, pos, state); 
 	}
 	

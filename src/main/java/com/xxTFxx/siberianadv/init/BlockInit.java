@@ -12,10 +12,12 @@ import com.xxTFxx.siberianadv.block.CupBlock;
 import com.xxTFxx.siberianadv.block.machines.BlockEnergyStorage_ITier;
 import com.xxTFxx.siberianadv.block.machines.BlockSimpleGenerator;
 import com.xxTFxx.siberianadv.block.machines.ElectricFurnace_ITier;
+import com.xxTFxx.siberianadv.block.machines.Grinder;
 import com.xxTFxx.siberianadv.block.machines.InductionFurnace;
 import com.xxTFxx.siberianadv.block.machines.OilPump;
 import com.xxTFxx.siberianadv.block.machines.PhotovoltaicPanel;
 import com.xxTFxx.siberianadv.block.machines.PortableGenerator;
+import com.xxTFxx.siberianadv.block.machines.SimpleMiner;
 
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
@@ -33,13 +35,16 @@ public class BlockInit {
 	public static final Block CUP = new CupBlock(Material.WOOD, SoundType.GLASS, "cup", 0.3F);
 	
 	//machines
-	public static final Block SIMPLE_GENERATOR = new BlockSimpleGenerator("simple_generator");
+	public static final Block SIMPLE_GENERATOR = new BlockSimpleGenerator("solid_fuel_generator");
 	public static final Block ENERGYSTORAGE_ITIER = new BlockEnergyStorage_ITier("energy_storage_1");
 	public static final Block PHOTOVOLTAICPANEL_BLOCK = new PhotovoltaicPanel("photovoltaic_panel");
 	public static final Block ELECTRIC_FURNACE_ITIER = new ElectricFurnace_ITier("electric_furnace_1");
 	public static final Block INDUCTION_FURNACE = new InductionFurnace("induction_furnace");
 	public static final Block PORTABLE_GENERATOR = new PortableGenerator("portable_generator");
 	public static final Block OIL_PUMP = new OilPump("oil_pump");
+	public static final Block GRINDER = new Grinder("grinder");
+	public static final Block SIMPLE_MINER = new SimpleMiner("simple_miner");
+
 		
 	
 	//fluids

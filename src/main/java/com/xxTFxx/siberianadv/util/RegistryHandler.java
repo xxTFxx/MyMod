@@ -8,14 +8,17 @@ import com.xxTFxx.siberianadv.init.BiomeInit;
 import com.xxTFxx.siberianadv.init.EntityInit;
 import com.xxTFxx.siberianadv.init.FluidInit;
 import com.xxTFxx.siberianadv.init.BlockInit;
-import com.xxTFxx.siberianadv.init.ModItems;
+import com.xxTFxx.siberianadv.init.ItemInit;
+import com.xxTFxx.siberianadv.init.RecipesInit;
 import com.xxTFxx.siberianadv.item.CoffeCup;
 import com.xxTFxx.siberianadv.item.ItemBase;
 import com.xxTFxx.siberianadv.item.ItemModRecord;
 import com.xxTFxx.siberianadv.item.ItemModSword;
 import com.xxTFxx.siberianadv.materials.ModMaterials;
 import com.xxTFxx.siberianadv.network.PacketHandler;
-import com.xxTFxx.siberianadv.tabs.TEOilPump;
+import com.xxTFxx.siberianadv.tileentity.TEGrinder;
+import com.xxTFxx.siberianadv.tileentity.TEOilPump;
+import com.xxTFxx.siberianadv.tileentity.TESimpleMiner;
 import com.xxTFxx.siberianadv.tileentity.TileEntityElectricFurnace_ITier;
 import com.xxTFxx.siberianadv.tileentity.TileEntityEnergyStorage_ITier;
 import com.xxTFxx.siberianadv.tileentity.TileEntityInductionFurnace;
@@ -72,13 +75,15 @@ public class RegistryHandler {
 	
 	private static void registerTileEntities()
 	{
-		GameRegistry.registerTileEntity(TileEntitySimpleGenerator.class, new ResourceLocation(Main.MOD_ID + "simple_generator"));
+		GameRegistry.registerTileEntity(TileEntitySimpleGenerator.class, new ResourceLocation(Main.MOD_ID + "solid_fluid_generator"));
 		GameRegistry.registerTileEntity(TileEntityPhotovoltaicPanel.class, new ResourceLocation(Main.MOD_ID + ":photovoltaic_panel"));
 		GameRegistry.registerTileEntity(TileEntityElectricFurnace_ITier.class, new ResourceLocation(Main.MOD_ID + ":electric_furnace_1"));
 		GameRegistry.registerTileEntity(TileEntityEnergyStorage_ITier.class, new ResourceLocation(Main.MOD_ID + ":electric_storage_1"));
 		GameRegistry.registerTileEntity(TileEntityInductionFurnace.class, new ResourceLocation(Main.MOD_ID + ":induction_furnace"));
 		GameRegistry.registerTileEntity(TileEntityPortableGenerator.class, new ResourceLocation(Main.MOD_ID + ":portable_generator"));
 		GameRegistry.registerTileEntity(TEOilPump.class, new ResourceLocation(Main.MOD_ID + ":oil_pump"));
+		GameRegistry.registerTileEntity(TEGrinder.class, new ResourceLocation(Main.MOD_ID + ":grinder"));
+		GameRegistry.registerTileEntity(TESimpleMiner.class, new ResourceLocation(Main.MOD_ID + ":simple_miner"));
 
 
 	}
@@ -87,14 +92,15 @@ public class RegistryHandler {
 	@SubscribeEvent
 	public static void registerItems(Register<Item> event) {
 		final Item[] items = {
-				ModItems.STALINIUM_INGOT,
+				ItemInit.STALINIUM_INGOT,
 				new ItemModRecord("soviet_anthem" , ModSoundEvent.SOVIET_ANTHEM),
 				new ItemModSword(ModMaterials.MOD_TOOL , "stalinium_sword"),
 				new CoffeCup("coffecup"),
 				new ItemBase("bear_fur"),
-				ModItems.USHANKA,
-				ModItems.BEAR_MEAT_RAW,
-				ModItems.BEAR_MEAT_COOKED,
+				ItemInit.USHANKA,
+				ItemInit.BEAR_MEAT_RAW,
+				ItemInit.BEAR_MEAT_COOKED,
+				ItemInit.IRON_DUST
 				//ModItems.PORTABLE_GENERATOR_ITEM
 		};
 		
@@ -111,7 +117,8 @@ public class RegistryHandler {
 			new ItemBlock(BlockInit.PORTABLE_GENERATOR).setRegistryName(BlockInit.PORTABLE_GENERATOR.getRegistryName()),
 			new ItemBlock(BlockInit.PETROLEUM_BLOCK).setRegistryName(BlockInit.PETROLEUM_BLOCK.getRegistryName()),
 			new ItemBlock(BlockInit.OIL_PUMP).setRegistryName(BlockInit.OIL_PUMP.getRegistryName()),
-
+			new ItemBlock(BlockInit.GRINDER).setRegistryName(BlockInit.GRINDER.getRegistryName()),
+			new ItemBlock(BlockInit.SIMPLE_MINER).setRegistryName(BlockInit.SIMPLE_MINER.getRegistryName()),
 
 			//new ItemBlock(ModBlocks.SNOWM).setRegistryName(ModBlocks.SNOWM.getRegistryName())
 		};
@@ -138,6 +145,7 @@ public class RegistryHandler {
 	{
 		OreDictionaryCompat.registerOres();
 		NetworkRegistry.INSTANCE.registerGuiHandler(Main.MOD_ID , new GUIHandler());
+		RecipesInit.init();
 	}
 	
 	public static void postInitRegistries(FMLPostInitializationEvent event)

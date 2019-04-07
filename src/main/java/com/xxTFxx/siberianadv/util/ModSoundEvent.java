@@ -10,9 +10,11 @@ import net.minecraftforge.fml.common.registry.ForgeRegistries;
 public class ModSoundEvent{
 	
 	public static SoundEvent SOVIET_ANTHEM;
+	public static SoundEvent PORTABLE_GENERATOR;
 	
 	public static void registerSounds() {
 		SOVIET_ANTHEM = registerSound("music.soviet_anthem");
+		PORTABLE_GENERATOR = registerSound("portable_generator");
 	}
 	
 	private static SoundEvent registerSound(String name) {

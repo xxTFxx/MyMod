@@ -18,7 +18,7 @@ import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
 @ObjectHolder(Main.MOD_ID)
-public class ModItems {
+public class ItemInit {
 	//ModelUshanka ushanka = new ModelUshanka();
 
 	public static final Item STALINIUM_INGOT = new ItemBase("stalinium_ingot");
@@ -36,6 +36,8 @@ public class ModItems {
 	public static final CustomFood BEAR_MEAT_COOKED = new CustomFood("bear_meat_cooked", 8, true);
 	
 	public static final ArmourModel USHANKA = new ArmourModel("ushanka", ModMaterials.BEAR_MATERIAL, EntityEquipmentSlot.HEAD , new ModelUshanka());
+	
+	public static final Item IRON_DUST = new ItemBase("iron_dust");
 	
 	//public static final PortableGeneratorItem PORTABLE_GENERATOR_ITEM = new PortableGeneratorItem("portable_generator" , ModBlocks.PORTABLE_GENERATOR);
 }

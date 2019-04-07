@@ -1,7 +1,8 @@
 package com.xxTFxx.siberianadv.block.machines;
 
-import com.xxTFxx.siberianadv.block.BasicBlock;
-import com.xxTFxx.siberianadv.tileentity.TEOilPump;
+import com.xxTFxx.siberianadv.Main;
+import com.xxTFxx.siberianadv.block.RotBlock;
+import com.xxTFxx.siberianadv.tileentity.TESimpleMiner;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
@@ -12,9 +13,9 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class OilPump extends BasicBlock{
-	
-	public OilPump(String name) {
+public class SimpleMiner extends RotBlock{
+
+	public SimpleMiner(String name) {
 		super(Material.IRON, name);
 	}
 	
@@ -25,21 +26,17 @@ public class OilPump extends BasicBlock{
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TEOilPump();
+		return new TESimpleMiner();
 	}
 	
 	@Override
 	public boolean onBlockActivated(World worldIn, BlockPos pos, IBlockState state, EntityPlayer playerIn,
 			EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
-		
-		TEOilPump tile = (TEOilPump)worldIn.getTileEntity(pos);
-		
-		if(!worldIn.isRemote)
-		{
-			System.out.println(tile.getFluidAmount());
-			
+
+		if(!worldIn.isRemote) {
+			playerIn.openGui(Main.MOD_ID, Main.GUI_SIMPLEMINER, worldIn, pos.getX(), pos.getY(), pos.getZ());
 		}
+		
 		return true;
 	}
-
 }

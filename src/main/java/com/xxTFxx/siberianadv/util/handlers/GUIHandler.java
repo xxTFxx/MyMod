@@ -1,6 +1,8 @@
 package com.xxTFxx.siberianadv.util.handlers;
 
 import com.xxTFxx.siberianadv.Main;
+import com.xxTFxx.siberianadv.container.ContGrinder;
+import com.xxTFxx.siberianadv.container.ContSimpleMiner;
 import com.xxTFxx.siberianadv.container.ContainerElectricFurnace_ITier;
 import com.xxTFxx.siberianadv.container.ContainerEnergyStorage;
 import com.xxTFxx.siberianadv.container.ContainerInductionFurnace;
@@ -9,10 +11,14 @@ import com.xxTFxx.siberianadv.container.ContainerPortableGenerator;
 import com.xxTFxx.siberianadv.container.ContainerSimpleGenerator;
 import com.xxTFxx.siberianadv.gui.GUIElectricFurnace_ITier;
 import com.xxTFxx.siberianadv.gui.GUIEnergyStorage;
+import com.xxTFxx.siberianadv.gui.GUIGrinder;
 import com.xxTFxx.siberianadv.gui.GUIInductionFurnace;
 import com.xxTFxx.siberianadv.gui.GUIPhotovoltaicPanel;
 import com.xxTFxx.siberianadv.gui.GUIPortableGenerator;
 import com.xxTFxx.siberianadv.gui.GUISimpleGenerator;
+import com.xxTFxx.siberianadv.gui.GUISimpleMiner;
+import com.xxTFxx.siberianadv.tileentity.TEGrinder;
+import com.xxTFxx.siberianadv.tileentity.TESimpleMiner;
 import com.xxTFxx.siberianadv.tileentity.TileEntityElectricFurnace_ITier;
 import com.xxTFxx.siberianadv.tileentity.TileEntityEnergyStorage_ITier;
 import com.xxTFxx.siberianadv.tileentity.TileEntityInductionFurnace;
@@ -35,6 +41,8 @@ public class GUIHandler implements IGuiHandler{
 		if(ID == Main.GUI_ELECTRICFURNACE_1) return new GUIElectricFurnace_ITier(player.inventory , (TileEntityElectricFurnace_ITier)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == Main.GUI_INDUCTIONFURNACE) return new GUIInductionFurnace(player.inventory , (TileEntityInductionFurnace)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == Main.GUI_PORTABLE_GENERATOR) return new GUIPortableGenerator(player.inventory , (TileEntityPortableGenerator)world.getTileEntity(new BlockPos(x,y,z)));
+		if(ID == Main.GUI_GRINDER) return new GUIGrinder(player.inventory , (TEGrinder)world.getTileEntity(new BlockPos(x,y,z)));
+		if(ID == Main.GUI_SIMPLEMINER) return new GUISimpleMiner(player.inventory , (TESimpleMiner)world.getTileEntity(new BlockPos(x,y,z)));
 
 		return null;
 	}
@@ -47,6 +55,8 @@ public class GUIHandler implements IGuiHandler{
 		if(ID == Main.GUI_ELECTRICFURNACE_1) return new ContainerElectricFurnace_ITier(player.inventory , (TileEntityElectricFurnace_ITier)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == Main.GUI_INDUCTIONFURNACE) return new ContainerInductionFurnace(player.inventory , (TileEntityInductionFurnace)world.getTileEntity(new BlockPos(x,y,z)));
 		if(ID == Main.GUI_PORTABLE_GENERATOR) return new ContainerPortableGenerator(player.inventory , (TileEntityPortableGenerator)world.getTileEntity(new BlockPos(x,y,z)));
+		if(ID == Main.GUI_GRINDER) return new ContGrinder(player.inventory , (TEGrinder)world.getTileEntity(new BlockPos(x,y,z)));
+		if(ID == Main.GUI_SIMPLEMINER) return new ContSimpleMiner(player.inventory , (TESimpleMiner)world.getTileEntity(new BlockPos(x,y,z)));
 
 		return null;
 	}

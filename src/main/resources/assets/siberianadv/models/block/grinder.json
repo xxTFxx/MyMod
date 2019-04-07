@@ -1,0 +1,8 @@
+{
+    "parent": "block/orientable",
+    "textures": {
+        "top": "siberianadv:blocks/grinder_top",
+        "front": "siberianadv:blocks/grinder_front",
+        "side": "siberianadv:blocks/machine_side"
+    }
+}

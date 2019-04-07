@@ -1,7 +1,7 @@
 package com.xxTFxx.siberianadv.tabs;
 
 import com.xxTFxx.siberianadv.Main;
-import com.xxTFxx.siberianadv.init.ModItems;
+import com.xxTFxx.siberianadv.init.ItemInit;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -17,7 +17,7 @@ public class ModTab extends CreativeTabs{
 	@SideOnly(Side.CLIENT)
 	@Override
 	public ItemStack getTabIconItem() {
-		return new ItemStack(ModItems.STALINIUM_INGOT);
+		return new ItemStack(ItemInit.STALINIUM_INGOT);
 	}
 	
 	public static final ModTab Mod_Tab = new ModTab("mod_tab") ;

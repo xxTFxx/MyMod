@@ -14,6 +14,7 @@ import net.minecraft.block.properties.PropertyBool;
 import net.minecraft.block.properties.PropertyDirection;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -93,25 +94,30 @@ public class PortableGenerator extends RotBlock{
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		TileEntity tileentity = worldIn.getTileEntity(pos);
+		TileEntityPortableGenerator tileEntityPortableGenerator = (TileEntityPortableGenerator)tileentity;
 		
-		if(!worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10, true).isCreative())
+		if(!worldIn.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 10, false).isCreative())
 		{
-			if(tileentity instanceof TileEntityPortableGenerator)
-			{
-				TileEntityPortableGenerator tileEntityPortableGenerator = (TileEntityPortableGenerator)tileentity;
-				
 				ItemStack itemstack = new ItemStack(Item.getItemFromBlock(this));
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
-				nbttagcompound.setInteger("Energy", tileEntityPortableGenerator.getEnergyStored());
-				nbttagcompound.setInteger("Fuel", tileEntityPortableGenerator.getFluidAmount());            	
+				if(tileEntityPortableGenerator.getEnergyStored() != 0)
+				{
+					nbttagcompound.setInteger("Energy", tileEntityPortableGenerator.getEnergyStored());					
+				}
+				if(tileEntityPortableGenerator.getFluidAmount() != 0)
+				{
+					nbttagcompound.setInteger("Fuel", tileEntityPortableGenerator.getFluidAmount());            						
+				}
 				
 				itemstack.setTagCompound(nbttagcompound);
 				
 				spawnAsEntity(worldIn, pos, itemstack);
 				
-			}
 			
 		}
+		
+		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileEntityPortableGenerator.handler.getStackInSlot(0)));
+		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileEntityPortableGenerator.handler.getStackInSlot(1)));
 		
 		super.breakBlock(worldIn, pos, state);
 	}

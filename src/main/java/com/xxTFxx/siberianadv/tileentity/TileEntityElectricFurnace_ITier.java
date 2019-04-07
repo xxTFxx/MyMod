@@ -1,12 +1,16 @@
 package com.xxTFxx.siberianadv.tileentity;
 
 
+import javax.annotation.Nullable;
+
 import com.xxTFxx.siberianadv.energy.CustomEnergyStorage;
 
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.SPacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
@@ -16,7 +20,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityElectricFurnace_ITier extends TileEntity implements ITickable{
+public class TileEntityElectricFurnace_ITier extends BasicEnergyTile implements ITickable{
 
 	
 	public ItemStackHandler handler = new ItemStackHandler(2)
@@ -27,19 +31,20 @@ public class TileEntityElectricFurnace_ITier extends TileEntity implements ITick
 			};
 	private CustomEnergyStorage storage = new CustomEnergyStorage(10000 , 1000);
 	private int capacity = storage.getMaxEnergyStored();
-	private int a = 4;
+	private int ENERGY_DRAIN = 4;
 	private int cookTime;
 	private int totalCookTime = 20;
+	private boolean shouldUpdate = false;
 	
 	@Override
 	public void update() {
 		
-		if(storage.getEnergyStored() > a && !handler.getStackInSlot(0).isEmpty() && handler.getStackInSlot(1).getCount() < 64)
+		if(storage.getEnergyStored() > ENERGY_DRAIN && !handler.getStackInSlot(0).isEmpty() && handler.getStackInSlot(1).getCount() < 64)
 		{
 			if(canSmelt() )
 			{
 				cookTime++;
-				storage.consumeEnergy(a);
+				storage.consumeEnergy(ENERGY_DRAIN);
 				if(cookTime == totalCookTime)
 				{
 					if(handler.getStackInSlot(1).getCount() > 0)
@@ -53,6 +58,7 @@ public class TileEntityElectricFurnace_ITier extends TileEntity implements ITick
 					handler.getStackInSlot(0).shrink(1);
 					cookTime = 0;
 				}
+				shouldUpdate = true;
 			}
 			else if(cookTime != 0)
 			{
@@ -66,6 +72,12 @@ public class TileEntityElectricFurnace_ITier extends TileEntity implements ITick
 		if(cookTime != 0 && handler.getStackInSlot(0).isEmpty())
 		{
 			cookTime = 0;
+		}
+		
+		if(shouldUpdate)
+		{
+			sendUpdates();
+			shouldUpdate = false;
 		}
 	}
 	
@@ -113,12 +125,20 @@ public class TileEntityElectricFurnace_ITier extends TileEntity implements ITick
 		return this.storage.getMaxEnergyStored();
 	}
 	
+	public int getCookTime()
+	{
+		return this.cookTime;
+	}
 	
+	public int getTotalCookTime()
+	{
+		return this.totalCookTime;
+	}
 	
 	@Override
 	public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 		
-		if(capability.equals(CapabilityEnergy.ENERGY))
+		if(capability == CapabilityEnergy.ENERGY)
 		{
 			return true;
 		}
@@ -131,7 +151,7 @@ public class TileEntityElectricFurnace_ITier extends TileEntity implements ITick
 
 	@Override
 	public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
-		if(capability.equals(CapabilityEnergy.ENERGY))
+		if(capability == CapabilityEnergy.ENERGY)
 		{
 			return (T)this.storage;
 		}
@@ -141,40 +161,34 @@ public class TileEntityElectricFurnace_ITier extends TileEntity implements ITick
 		}
 		return super.getCapability(capability, facing);
 	}
-	    
-	    public int getField(int id)
-		{
-			switch (id) {
-			case 0:
-				return this.storage.getEnergyStored();
-			case 1:
-				return this.capacity;
-			case 2:
-				return this.cookTime;
-			case 3:
-				return this.totalCookTime;
-			default:
-				return 0;
-			}
-		}
 
-	public void setField(int id, int value) {
-		switch(id) {
-			case 0:
-				this.storage.setEnergy(value);
-			case 1:
-				this.cookTime = value;
-		}
+	
+	@Override
+	@Nullable
+	public SPacketUpdateTileEntity getUpdatePacket() {
+		return new SPacketUpdateTileEntity(this.pos, 3, this.getUpdateTag());
+	}
+
+	@Override
+	public NBTTagCompound getUpdateTag() {
+		return this.writeToNBT(new NBTTagCompound());
 	}
 	
 	@Override
-	public final NBTTagCompound getUpdateTag() {
-		return this.writeToNBT(new NBTTagCompound());
+	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
+		super.onDataPacket(net, pkt);
+		handleUpdateTag(pkt.getNbtCompound());
 	}
-
-	@Override
-	public SPacketUpdateTileEntity getUpdatePacket() {
-		return new SPacketUpdateTileEntity(this.getPos(), 1, this.getUpdateTag());
+	
+	private IBlockState getState() {
+		return world.getBlockState(pos);
+	}
+	
+	private void sendUpdates() {
+		world.markBlockRangeForRenderUpdate(pos, pos);
+		world.notifyBlockUpdate(pos, getState(), getState(), 3);
+		world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
+		markDirty();
 	}
 	
 	public boolean isUsableByPlayer(EntityPlayer player)

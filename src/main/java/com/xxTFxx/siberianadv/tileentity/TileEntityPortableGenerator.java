@@ -40,11 +40,12 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 		};
 	};
 	
-	private CustomEnergyStorage storage = new CustomEnergyStorage(40000);
+	private CustomEnergyStorage storage = new CustomEnergyStorage(40000 , 0 , 500);
 	private FluidTank tank = new FluidTank(FluidInit.PETROLEUM_FLUID, 0, 5000);
 	private int FLUID_DRAIN = 5;
 	private int ENERGY_GAIN = 100;
 	private int output = 100;
+	private int timer = 0;
 	private boolean isTurned = false;
 	private boolean shouldUpdate = false;
 	
@@ -80,9 +81,10 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 		{
 			if(tank.getFluidAmount() >= FLUID_DRAIN && storage.getEnergyStored() + ENERGY_GAIN <= storage.getMaxEnergyStored())
 			{
-				if(world.isRemote)
+				timer++;
+				if(timer % 8 == 0)
 				{
-					//world.playSound(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 100, true), pos, ModSoundEvent.SOVIET_ANTHEM, SoundCategory.BLOCKS, 1.0F, 1.0F);
+					world.playSound(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 100, true), pos, ModSoundEvent.PORTABLE_GENERATOR, SoundCategory.BLOCKS, 1.0F, 2.0F);
 					
 				}
 				shouldUpdate = true;

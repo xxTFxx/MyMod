@@ -55,6 +55,7 @@ public class ElectricFurnace_ITier extends RotBlock{
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
 		TileEntityElectricFurnace_ITier tileentity = (TileEntityElectricFurnace_ITier)worldIn.getTileEntity(pos);
 		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(0)));
+		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(1)));
 		super.breakBlock(worldIn, pos, state); 
 	}
 	

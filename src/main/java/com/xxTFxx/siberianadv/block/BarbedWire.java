@@ -3,7 +3,7 @@ package com.xxTFxx.siberianadv.block;
 import java.util.Random;
 
 import com.xxTFxx.siberianadv.init.BlockInit;
-import com.xxTFxx.siberianadv.init.ModItems;
+import com.xxTFxx.siberianadv.init.ItemInit;
 import com.xxTFxx.siberianadv.util.handlers.DamageSourceHandler;
 
 import net.minecraft.block.BlockHorizontal;
@@ -126,7 +126,7 @@ public class BarbedWire extends BasicBlock{
 		EnumHand hand, EnumFacing facing, float hitX, float hitY, float hitZ) {
 		
 
-		if(playerIn.getHeldItemMainhand().getItem() == ModItems.STALINIUM_INGOT) {
+		if(playerIn.getHeldItemMainhand().getItem() == ItemInit.STALINIUM_INGOT) {
 			playerIn.addItemStackToInventory(new ItemStack(BlockInit.BARBEDWIRE));
 			worldIn.setBlockToAir(pos);
 			return true;

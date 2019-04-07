@@ -33,7 +33,9 @@ public class Main {
 	public static final int GUI_INDUCTIONFURNACE = 4;
 	public static final int GUI_SIMPLE_GENERATOR = 5;
 	public static final int GUI_PORTABLE_GENERATOR = 6;
-	
+	public static final int GUI_GRINDER = 7;
+	public static final int GUI_SIMPLEMINER = 8;
+
 	public static Logger logger;
 	
 	static { FluidRegistry.enableUniversalBucket(); }

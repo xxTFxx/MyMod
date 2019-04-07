@@ -4,5 +4,11 @@
         "category": "record",
         "subtitle": "music.soviet_anthem",
         "sounds": [ { "name": "siberianadv:music/soviet_anthem", "stream": true } ]
-    }
+    },
+	"portable_generator":
+	{
+		"category": "block",
+		"subtitle": "portable_generator",
+        "sounds": [ "siberianadv:portable_generator" ]
+	}
 }

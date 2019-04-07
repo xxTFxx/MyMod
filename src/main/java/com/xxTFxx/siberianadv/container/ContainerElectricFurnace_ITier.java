@@ -47,31 +47,6 @@ public class ContainerElectricFurnace_ITier extends Container{
 		return this.tileentity.isUsableByPlayer(playerIn);
 	}
 	
-	@Override
-	public void updateProgressBar(int id, int data) {
-		this.tileentity.setField(id, data);
-	}
-	
-	@Override
-	public void detectAndSendChanges() {
-		super.detectAndSendChanges();
-		
-		for(int i=0 ; i < this.listeners.size() ; i++)
-		{
-			IContainerListener listener = (IContainerListener)this.listeners.get(i);
-			if(this.energy != this.tileentity.getField(0))
-			{
-				listener.sendWindowProperty(this, this.energy, this.tileentity.getField(0));
-			}
-			if(this.cookTime != this.tileentity.getField(2))
-			{
-				listener.sendWindowProperty(this, 1, this.tileentity.getField(2));
-			}
-		}
-		
-		this.energy = this.tileentity.getField(0);
-		this.cookTime = this.tileentity.getField(2);
-	}
 	
 	 public ItemStack transferStackInSlot(EntityPlayer playerIn, int index)
 	    {
