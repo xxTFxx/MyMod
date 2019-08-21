@@ -1,5 +1,6 @@
 package com.xxTFxx.siberianadv.gui;
 
+import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.container.ContSimpleMiner;
 import com.xxTFxx.siberianadv.tileentity.TESimpleMiner;
 
@@ -13,7 +14,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class GUISimpleMiner extends GuiContainer{
 
-	private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
+	private static final ResourceLocation CHEST_GUI_TEXTURE = new ResourceLocation(Main.MOD_ID + ":textures/gui/simple_miner.png");
 	private final InventoryPlayer playerInventory;
 	private final TESimpleMiner te;
     private final int inventoryRows;
@@ -45,6 +46,11 @@ public class GUISimpleMiner extends GuiContainer{
      */
     protected void drawGuiContainerForegroundLayer(int mouseX, int mouseY)
     {
+    	if(mouseX > this.guiLeft + 190 && mouseY > this.guiTop + 7 && mouseX < this.guiLeft + 208 && mouseY < this.guiTop + 80)
+		{
+			this.drawHoveringText(Integer.toString(this.te.getEnergyStored()), mouseX - this.guiLeft, mouseY - this.guiTop);
+		}
+    	
         //this.fontRenderer.drawString(this.te.getDisplayName().getUnformattedText(), 8, 6, 4210752);
         this.fontRenderer.drawString(this.playerInventory.getDisplayName().getUnformattedText(), 8, this.ySize - 96 + 2, 4210752);
     }
@@ -58,7 +64,20 @@ public class GUISimpleMiner extends GuiContainer{
         this.mc.getTextureManager().bindTexture(CHEST_GUI_TEXTURE);
         int i = (this.width - this.xSize) / 2;
         int j = (this.height - this.ySize) / 2;
-        this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.inventoryRows * 18 + 17);
-        this.drawTexturedModalRect(i, j + this.inventoryRows * 18 + 17, 0, 126, this.xSize, 96);
+        ////this.drawTexturedModalRect(i, j, 0, 0, this.xSize, this.inventoryRows * 18 + 17);
+        //this.drawTexturedModalRect(i, j + this.inventoryRows * 18 + 17, 0, 126, this.xSize, 96);
+        this.drawTexturedModalRect(this.guiLeft, this.guiTop, 0, 0, this.xSize + 39, this.ySize);
+        
+        int k = this.getEnergyStoredScaled(72);
+		this.drawTexturedModalRect(this.guiLeft + 192, this.guiTop + 8, 215, 0, 16, 72 - k);
     }
+    
+    
+    
+    private int getEnergyStoredScaled(int pixels)
+	{
+		int i = this.te.getEnergyStored();
+		int j = this.te.getMaxEnergyStored();
+		return i != 0 && j != 0 ? i * pixels / j : 0; 
+	}
 }

@@ -3,6 +3,7 @@ package com.xxTFxx.siberianadv.tileentity;
 
 import javax.annotation.Nullable;
 
+import com.xxTFxx.siberianadv.block.machines.ElectricFurnace;
 import com.xxTFxx.siberianadv.energy.CustomEnergyStorage;
 
 import net.minecraft.block.state.IBlockState;
@@ -20,13 +21,13 @@ import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
 
-public class TileEntityElectricFurnace_ITier extends BasicEnergyTile implements ITickable{
+public class TE_ElectricFurnace extends BasicEnergyTile implements ITickable{
 
 	
 	public ItemStackHandler handler = new ItemStackHandler(2)
 			{
 				protected void onContentsChanged(int slot) {
-					TileEntityElectricFurnace_ITier.this.markDirty();
+					TE_ElectricFurnace.this.markDirty();
 				};
 			};
 	private CustomEnergyStorage storage = new CustomEnergyStorage(10000 , 1000);
@@ -35,9 +36,18 @@ public class TileEntityElectricFurnace_ITier extends BasicEnergyTile implements 
 	private int cookTime;
 	private int totalCookTime = 20;
 	private boolean shouldUpdate = false;
+	private boolean working = false;
+	private int energy;
 	
 	@Override
 	public void update() {
+		
+		if(storage.getEnergyStored() != energy)
+		{
+			energy = storage.getEnergyStored();
+			//shouldUpdate = true;
+			world.notifyBlockUpdate(pos, getState(), getState(), 3);
+		}
 		
 		if(storage.getEnergyStored() > ENERGY_DRAIN && !handler.getStackInSlot(0).isEmpty() && handler.getStackInSlot(1).getCount() < 64)
 		{
@@ -45,6 +55,13 @@ public class TileEntityElectricFurnace_ITier extends BasicEnergyTile implements 
 			{
 				cookTime++;
 				storage.consumeEnergy(ENERGY_DRAIN);
+				
+				if(!working)
+				{
+					working = true;
+					ElectricFurnace.setState(true, world, pos);
+				}
+					
 				if(cookTime == totalCookTime)
 				{
 					if(handler.getStackInSlot(1).getCount() > 0)
@@ -69,10 +86,17 @@ public class TileEntityElectricFurnace_ITier extends BasicEnergyTile implements 
 		{
 			cookTime = 0;
 		}
-		if(cookTime != 0 && handler.getStackInSlot(0).isEmpty())
+		else if(working)
+		{
+			working = false;
+			ElectricFurnace.setState(false, world, pos);
+		}
+		/*if(cookTime != 0 && handler.getStackInSlot(0).isEmpty())
 		{
 			cookTime = 0;
-		}
+			ElectricFurnace.setState(false, world, pos);
+
+		}*/
 		
 		if(shouldUpdate)
 		{
@@ -103,6 +127,7 @@ public class TileEntityElectricFurnace_ITier extends BasicEnergyTile implements 
 		super.writeToNBT(compound);
 		compound.setTag("Inventory", this.handler.serializeNBT());
 		compound.setInteger("cookTime", this.cookTime);
+		compound.setBoolean("Working", this.working);
 		this.storage.writeToNBT(compound);
 		return compound;
 	}
@@ -112,6 +137,7 @@ public class TileEntityElectricFurnace_ITier extends BasicEnergyTile implements 
 		super.readFromNBT(compound);
 		this.handler.deserializeNBT(compound.getCompoundTag("Inventory"));
 		this.cookTime = compound.getInteger("cookTime");
+		this.working = compound.getBoolean("Working");
 		this.storage.readFromNBT(compound);
 	}
 	

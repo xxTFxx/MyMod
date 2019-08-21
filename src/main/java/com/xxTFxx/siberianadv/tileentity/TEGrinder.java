@@ -27,17 +27,17 @@ public class TEGrinder extends BasicEnergyTile implements ITickable{
 	};
 	
 	private CustomEnergyStorage storage = new CustomEnergyStorage(10000, 500, 0);
-	int itemAmount;
-	int currentTime = 0;
-	int totalTime = 60;
-	int ENERGY_DRAIN = 10;
+	private int itemAmount;
+	private int currentTime = 0;
+	private int totalTime = 60;
+	private int ENERGY_DRAIN = 10;
 	
 	@Override
 	public void update() {
 
 		
 		
-		if(!handler.getStackInSlot(0).isEmpty() && canSmelt() && storage.getEnergyStored() > ENERGY_DRAIN)
+		if(!handler.getStackInSlot(0).isEmpty() && canSmelt() && storage.getEnergyStored() >= ENERGY_DRAIN)
 		{
 			itemAmount = GrinderRecipes.instance().getResultAmount(handler.getStackInSlot(0));
 			if(handler.getStackInSlot(1).getCount() + itemAmount <= 64)

@@ -1,6 +1,7 @@
 package com.xxTFxx.siberianadv.network;
 
 import io.netty.buffer.ByteBuf;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
@@ -12,6 +13,10 @@ public abstract class MessageXYZ<REQ extends IMessage> extends MessageBase<REQ>{
 
 
     public MessageXYZ(TileEntity te){
+        this();
+    }
+    
+    public MessageXYZ(EntityPlayer player){
         this();
     }
 

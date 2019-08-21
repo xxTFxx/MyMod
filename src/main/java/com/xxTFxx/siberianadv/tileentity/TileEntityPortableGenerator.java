@@ -102,7 +102,10 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 			shouldUpdate = false;
 		}
 		
-		sendEnergy();
+		if(storage.getEnergyStored() > output)
+		{
+			sendEnergy();			
+		}
 		
 	}
 	

@@ -1,0 +1,8 @@
+{
+    "variants": {
+        "facing=north": { "model": "siberianadv:electric_furnace_lit", "y": 180  },
+        "facing=south": { "model": "siberianadv:electric_furnace_lit"},
+        "facing=west":  { "model": "siberianadv:electric_furnace_lit", "y": 90 },
+        "facing=east":  { "model": "siberianadv:electric_furnace_lit", "y": 270 }
+    }
+}

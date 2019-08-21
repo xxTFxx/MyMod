@@ -2,7 +2,7 @@
     "parent": "block/orientable",
     "textures": {
         "top": "siberianadv:blocks/machine_top",
-        "front": "siberianadv:blocks/electric_furnace_1_front_off",
+        "front": "siberianadv:blocks/electric_furnace_front_off",
         "side": "siberianadv:blocks/machine_side"
     }
 }

@@ -1,6 +1,7 @@
 package com.xxTFxx.siberianadv.item;
 
 import com.xxTFxx.siberianadv.Main;
+import com.xxTFxx.siberianadv.init.ItemInit;
 import com.xxTFxx.siberianadv.models.ModelUshanka;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 
@@ -23,6 +24,7 @@ public class ArmourModel extends ItemArmor{
 		setCreativeTab(ModTab.Mod_Tab);
 		setMaxStackSize(1);
 		this.model = modelIn;
+		ItemInit.items.add(this);
 	}
 
 	@Override

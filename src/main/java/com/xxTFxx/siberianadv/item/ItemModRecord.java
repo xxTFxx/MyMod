@@ -1,6 +1,7 @@
 package com.xxTFxx.siberianadv.item;
 
 import com.xxTFxx.siberianadv.Main;
+import com.xxTFxx.siberianadv.init.ItemInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 
 import net.minecraft.client.renderer.block.model.ModelResourceLocation;
@@ -17,6 +18,7 @@ public class ItemModRecord extends ItemRecord{
 		setUnlocalizedName(Main.MOD_ID + "." + name);
 		setRegistryName(Main.MOD_ID , name);
 		setCreativeTab(ModTab.Mod_Tab);
+		ItemInit.items.add(this);
 	}
 	
 

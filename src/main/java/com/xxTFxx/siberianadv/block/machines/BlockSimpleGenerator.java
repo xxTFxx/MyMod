@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 public class BlockSimpleGenerator extends RotBlock{
 
 	public BlockSimpleGenerator(String name) {
-		super(Material.IRON , name);
+		super(Material.IRON , name , true);
 	}
 	
 	@Override

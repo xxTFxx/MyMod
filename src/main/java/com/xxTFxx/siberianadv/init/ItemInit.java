@@ -2,34 +2,43 @@ package com.xxTFxx.siberianadv.init;
 
 
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.xxTFxx.siberianadv.Main;
+import com.xxTFxx.siberianadv.block.machines.PortableGenerator;
 import com.xxTFxx.siberianadv.item.ArmourModel;
+import com.xxTFxx.siberianadv.item.CementBucket;
 import com.xxTFxx.siberianadv.item.CoffeCup;
 import com.xxTFxx.siberianadv.item.CustomFood;
 import com.xxTFxx.siberianadv.item.ItemBase;
+import com.xxTFxx.siberianadv.item.ItemFuel;
 import com.xxTFxx.siberianadv.item.ItemModRecord;
+import com.xxTFxx.siberianadv.item.ItemModSword;
 import com.xxTFxx.siberianadv.item.PortableGeneratorItem;
+import com.xxTFxx.siberianadv.item.WireTool;
 import com.xxTFxx.siberianadv.materials.ModMaterials;
 import com.xxTFxx.siberianadv.models.ModelUshanka;
+import com.xxTFxx.siberianadv.util.ModSoundEvent;
 
 import net.minecraft.inventory.EntityEquipmentSlot;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemSword;
 import net.minecraftforge.fml.common.registry.GameRegistry.ObjectHolder;
 
-@ObjectHolder(Main.MOD_ID)
 public class ItemInit {
+	public static final List<Item> items = new ArrayList<Item>();
 	//ModelUshanka ushanka = new ModelUshanka();
 
 	public static final Item STALINIUM_INGOT = new ItemBase("stalinium_ingot");
 	
-	public static final ItemSword STALINIUM_SWORD = null;
+	public static final Item STALINIUM_SWORD = new ItemModSword(ModMaterials.MOD_TOOL , "stalinium_sword");
 	
-	public static final ItemModRecord SOVIET_ANTHEM = null;
+	public static final Item SOVIET_ANTHEM = new ItemModRecord("soviet_anthem" , ModSoundEvent.SOVIET_ANTHEM);
 	
-	public static final CoffeCup COFFECUP = null;
+	public static final Item COFFECUP = new CoffeCup("coffecup");
 	
-	public static final ItemBase BEAR_FUR = null;
+	public static final Item BEAR_FUR = new ItemBase("bear_fur");
 	
 	public static final CustomFood BEAR_MEAT_RAW = new CustomFood("bear_meat_raw", 2, true);
 	
@@ -39,5 +48,14 @@ public class ItemInit {
 	
 	public static final Item IRON_DUST = new ItemBase("iron_dust");
 	
+	public static final Item SAWDUST = new ItemFuel("sawdust" , 20);
+	
+	public static final Item PELLET = new ItemFuel("pellet" , 1800);
+	
+	public static final Item PORTABLE_GENERATOR = new PortableGeneratorItem("portable_generator" , new PortableGenerator("portable_generator"));
+	
+	public static final Item CEMENT_BUCKET = new CementBucket("cement_bucket");
+	
+	public static final Item WIRETOOL = new WireTool("wiretool");
 	//public static final PortableGeneratorItem PORTABLE_GENERATOR_ITEM = new PortableGeneratorItem("portable_generator" , ModBlocks.PORTABLE_GENERATOR);
 }

@@ -1,7 +1,8 @@
-package com.xxTFxx.siberianadv.block;
+package com.xxTFxx.siberianadv.block.blocks;
 
 import java.util.Random;
 
+import com.xxTFxx.siberianadv.block.BasicBlock;
 import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.init.ItemInit;
 import com.xxTFxx.siberianadv.util.handlers.DamageSourceHandler;
@@ -41,7 +42,6 @@ public class BarbedWire extends BasicBlock{
 	public BarbedWire(String name) {
 		super(Material.ROCK, SoundType.METAL, name);
 		setHardness(20.0F);
-		BlockInit.blocks.add(this);
 	}
 	
 	@Override

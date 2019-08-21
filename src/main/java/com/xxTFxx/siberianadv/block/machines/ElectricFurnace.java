@@ -4,7 +4,7 @@ import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.block.RotBlock;
 import com.xxTFxx.siberianadv.init.BlockInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
-import com.xxTFxx.siberianadv.tileentity.TileEntityElectricFurnace_ITier;
+import com.xxTFxx.siberianadv.tileentity.TE_ElectricFurnace;
 import com.xxTFxx.siberianadv.tileentity.TileEntitySimpleGenerator;
 
 import net.minecraft.block.SoundType;
@@ -22,11 +22,12 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class ElectricFurnace_ITier extends RotBlock{
+public class ElectricFurnace extends RotBlock{
 	
 	public static final PropertyBool BURNING = PropertyBool.create("burning");
+    private static boolean keepInventory;
 
-	public ElectricFurnace_ITier(String name) {
+	public ElectricFurnace(String name) {
 		super(Material.IRON, SoundType.METAL, name, 1.0F);
 	//	this.setDefaultState(this.blockState.getBaseState().withProperty(BURNING, false));
 	}
@@ -48,30 +49,38 @@ public class ElectricFurnace_ITier extends RotBlock{
 	
 	@Override
 	public TileEntity createTileEntity(World world, IBlockState state) {
-		return new TileEntityElectricFurnace_ITier();
+		return new TE_ElectricFurnace();
 	}
 	
 	@Override
 	public void breakBlock(World worldIn, BlockPos pos, IBlockState state) {
-		TileEntityElectricFurnace_ITier tileentity = (TileEntityElectricFurnace_ITier)worldIn.getTileEntity(pos);
-		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(0)));
-		worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(1)));
+		
+		if(!keepInventory)
+		{
+			TE_ElectricFurnace tileentity = (TE_ElectricFurnace)worldIn.getTileEntity(pos);
+			worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(0)));
+			worldIn.spawnEntity(new EntityItem(worldIn , pos.getX() , pos.getY() , pos.getZ() , tileentity.handler.getStackInSlot(1)));			
+		}
 		super.breakBlock(worldIn, pos, state); 
 	}
 	
 	public static void setState(boolean isActive , World worldIn , BlockPos pos)
 	{
-		IBlockState state = worldIn.getBlockState(pos);
+        IBlockState iblockstate = worldIn.getBlockState(pos);
 		TileEntity tile = worldIn.getTileEntity(pos);
+		
+		keepInventory = true;
 		
 		if(isActive)
 		{
-			worldIn.setBlockState(pos, BlockInit.ELECTRIC_FURNACE_ITIER.getDefaultState().withProperty(BURNING, true) , 3);
+			worldIn.setBlockState(pos, BlockInit.ELECTRIC_FURNACE_LIT.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)) , 3);
 		}
 		else
 		{
-			worldIn.setBlockState(pos, BlockInit.ELECTRIC_FURNACE_ITIER.getDefaultState().withProperty(BURNING, false) , 3);
+			worldIn.setBlockState(pos, BlockInit.ELECTRIC_FURNACE.getDefaultState().withProperty(FACING, iblockstate.getValue(FACING)) , 3);
 		}
+		
+		keepInventory = false;
 		
 		if(tile != null)
 		{
@@ -80,9 +89,5 @@ public class ElectricFurnace_ITier extends RotBlock{
 		}
 	}
 	
-	@Override
-	  protected BlockStateContainer createBlockState()
-	  {
-	    return new BlockStateContainer(this, new IProperty[] {FACING});
-	  }
+
 }

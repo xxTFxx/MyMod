@@ -14,7 +14,7 @@ public class ItemBase extends Item{
 		setUnlocalizedName(Main.MOD_ID + "." + name);
 		setRegistryName(name);
 		setCreativeTab(ModTab.Mod_Tab);
-
+		ItemInit.items.add(this);
 	}
 	
 

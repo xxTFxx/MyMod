@@ -1,7 +1,8 @@
-package com.xxTFxx.siberianadv.block;
+package com.xxTFxx.siberianadv.block.blocks;
 
 import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.init.BlockInit;
+import com.xxTFxx.siberianadv.init.ItemInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 import com.xxTFxx.siberianadv.util.handlers.DamageSourceHandler;
 
@@ -10,6 +11,8 @@ import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.entity.Entity;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemBlock;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.math.BlockPos;
@@ -26,6 +29,7 @@ public class BarbedWireFence extends BlockPane{
 		setSoundType(SoundType.METAL);
 		setHardness(20.0F);
 		BlockInit.blocks.add(this);
+		ItemInit.items.add(new ItemBlock(this).setRegistryName(name));
 	}
 	
 	@Override

@@ -1,4 +1,6 @@
-package com.xxTFxx.siberianadv.block;
+package com.xxTFxx.siberianadv.block.blocks;
+
+import com.xxTFxx.siberianadv.block.RotBlock;
 
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;

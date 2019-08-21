@@ -2,7 +2,7 @@ package com.xxTFxx.siberianadv.block.machines;
 
 import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.block.RotBlock;
-import com.xxTFxx.siberianadv.tileentity.TileEntityElectricFurnace_ITier;
+import com.xxTFxx.siberianadv.tileentity.TE_ElectricFurnace;
 import com.xxTFxx.siberianadv.tileentity.TileEntityInductionFurnace;
 import com.xxTFxx.siberianadv.tileentity.TileEntitySimpleGenerator;
 

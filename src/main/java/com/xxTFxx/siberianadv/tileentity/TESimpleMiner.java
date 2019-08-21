@@ -42,34 +42,34 @@ public class TESimpleMiner extends BasicEnergyTile implements ITickable{
 		};
 	};
 	
-	private CustomEnergyStorage storage = new CustomEnergyStorage(40000 , 500 , 0);
+	private CustomEnergyStorage storage = new CustomEnergyStorage(20000 , 500 , 0);
 	private BlockPos blockPos;
 	private IBlockState state;
 	private int blockX = 1;
-	private int blockY = 2;
+	private int blockY = 1;
 	private int blockZ = 1;
-	private int timer = 20;
+	private int timer = 0;
+	private int totalTime;
+	private int ENERGY_DRAIN = 20;
 	private boolean working = false;
 	private boolean isTurned = true;
+	private boolean shouldUpdate = false;
 	
 	@Override
 	public void update() {
-		
-		
-		if(!working && storage.getEnergyStored() > 10 && isTurned)
+		if(!working && storage.getEnergyStored() >= ENERGY_DRAIN && isTurned)
 		{
 			blockPos = new BlockPos(pos.getX() - blockX, pos.getY() - blockY, pos.getZ() - blockZ);
 			state = world.getBlockState(blockPos);
 			
 			while(state.getBlock() == Blocks.AIR || state.getBlock() instanceof BlockLiquid)
 			{
-				//System.out.println(timer);
 				nextBlock();
 				blockPos = new BlockPos(pos.getX() - blockX, pos.getY() - blockY, pos.getZ() - blockZ);
 				state = world.getBlockState(blockPos);
 			}
 			
-			timer = (int) world.getBlockState(blockPos).getBlock().getBlockHardness(state, world, blockPos)*10;
+			totalTime = (int) world.getBlockState(blockPos).getBlock().getBlockHardness(state, world, blockPos)*10;
 			working = true;
 			
 			if(state.getBlock() == Blocks.BEDROCK)
@@ -83,19 +83,20 @@ public class TESimpleMiner extends BasicEnergyTile implements ITickable{
 			
 		}
 		
-		if(working && storage.getEnergyStored() > 10 && isTurned)
+		if(working && storage.getEnergyStored() >= ENERGY_DRAIN && isTurned)
 		{
-			timer--;
-			storage.consumeEnergy(10);
+			timer++;
+			storage.consumeEnergy(ENERGY_DRAIN);
+			shouldUpdate = true;
 		}
 		else if(working)
 		{
 			working = false;
 		}
 		
-		if(timer <= 0)
+		if(timer >= totalTime)
 		{
-			if(state != null && state.getBlock() != Blocks.BEDROCK)
+			if(state != null && state.getBlock() != Blocks.BEDROCK && state.getBlock() != Blocks.AIR)
 			{
 				NonNullList<ItemStack> list = NonNullList.<ItemStack>create();				
 				state.getBlock().getDrops(list, world, blockPos, state, 0);
@@ -113,10 +114,18 @@ public class TESimpleMiner extends BasicEnergyTile implements ITickable{
 				}
 				world.setBlockToAir(blockPos);				
 			}
+			shouldUpdate = true;
 			
 			nextBlock();
+			timer = 0;
 			working = false;
 			
+		}
+		
+		if(shouldUpdate)
+		{
+			sendUpdates();
+			shouldUpdate = false;
 		}
 	}
 	
@@ -132,7 +141,7 @@ public class TESimpleMiner extends BasicEnergyTile implements ITickable{
 					{
 						scanPos = new BlockPos(this.pos.getX() - x, this.blockY - y, this.pos.getZ() - z);
 						block = world.getBlockState(scanPos).getBlock();
-						if(block != Blocks.BEDROCK && block != Blocks.AIR && block != null)
+						if(block != Blocks.BEDROCK && block != Blocks.AIR)
 						{
 							return true;
 						}
@@ -159,6 +168,16 @@ public class TESimpleMiner extends BasicEnergyTile implements ITickable{
 				}
 			}
 		}
+	}
+	
+	public int getMaxEnergyStored()
+	{
+		return this.storage.getMaxEnergyStored();
+	}
+	
+	public int getEnergyStored()
+	{
+		return this.storage.getEnergyStored();
 	}
 	
 	@Override
@@ -239,6 +258,17 @@ public class TESimpleMiner extends BasicEnergyTile implements ITickable{
 
 	public int getSizeInventory() {
 		return 27;
+	}
+	
+	private IBlockState getState() {
+		return world.getBlockState(pos);
+	}
+	
+	private void sendUpdates() {
+		world.markBlockRangeForRenderUpdate(pos, pos);
+		world.notifyBlockUpdate(pos, getState(), getState(), 3);
+		world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
+		markDirty();
 	}
 
 }

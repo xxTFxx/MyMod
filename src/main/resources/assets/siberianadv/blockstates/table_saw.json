@@ -1,0 +1,11 @@
+{
+    "variants": 
+	{
+	    "normal": { "model": "siberianadv:table_saw"},
+        "facing=north": { "model": "siberianadv:table_saw"},
+        "facing=south": { "model": "siberianadv:table_saw", "y": 180 },
+        "facing=west":  { "model": "siberianadv:table_saw", "y": 270 },
+        "facing=east":  { "model": "siberianadv:table_saw", "y": 90}
+        
+    }
+}

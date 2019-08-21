@@ -38,7 +38,7 @@ public class PortableGenerator extends RotBlock{
 	public static final PropertyDirection FACING = PropertyDirection.create("facing", EnumFacing.Plane.HORIZONTAL);
 	
 	public PortableGenerator(String name) {
-		super(Material.IRON , name);
+		super(Material.IRON , name , false);
 		//setUnlocalizedName(Main.MOD_ID + "." + name);
 		//setRegistryName(name);
 		//setCreativeTab(ModTab.Mod_Tab);
@@ -100,17 +100,19 @@ public class PortableGenerator extends RotBlock{
 		{
 				ItemStack itemstack = new ItemStack(Item.getItemFromBlock(this));
 				NBTTagCompound nbttagcompound = new NBTTagCompound();
-				if(tileEntityPortableGenerator.getEnergyStored() != 0)
+				if(tileEntityPortableGenerator.getEnergyStored() != 0 || tileEntityPortableGenerator.getFluidAmount() != 0)
 				{
-					nbttagcompound.setInteger("Energy", tileEntityPortableGenerator.getEnergyStored());					
+					nbttagcompound.setInteger("Energy", tileEntityPortableGenerator.getEnergyStored());	
+					nbttagcompound.setInteger("Fuel", tileEntityPortableGenerator.getFluidAmount());            						
+					itemstack.setTagCompound(nbttagcompound);
 				}
-				if(tileEntityPortableGenerator.getFluidAmount() != 0)
+				/*if(tileEntityPortableGenerator.getFluidAmount() != 0)
 				{
 					nbttagcompound.setInteger("Fuel", tileEntityPortableGenerator.getFluidAmount());            						
 				}
 				
 				itemstack.setTagCompound(nbttagcompound);
-				
+				*/
 				spawnAsEntity(worldIn, pos, itemstack);
 				
 			

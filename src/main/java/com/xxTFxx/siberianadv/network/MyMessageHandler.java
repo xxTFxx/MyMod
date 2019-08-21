@@ -10,7 +10,8 @@ import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 public class MyMessageHandler implements IMessageHandler<MyMessage, IMessage> {
 	  // Do note that the default constructor is required, but implicitly defined in this case
 
-	  @Override public IMessage onMessage(MyMessage message, MessageContext ctx) {
+	  @Override
+	  public IMessage onMessage(MyMessage message, MessageContext ctx) {
 	    // This is the player the packet was sent to the server from
 	    EntityPlayerMP serverPlayer = ctx.getServerHandler().player;
 	    // The value that was sent

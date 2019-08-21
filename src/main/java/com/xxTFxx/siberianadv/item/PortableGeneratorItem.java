@@ -1,10 +1,15 @@
 package com.xxTFxx.siberianadv.item;
 
+import java.util.List;
+
 import com.xxTFxx.siberianadv.Main;
+import com.xxTFxx.siberianadv.init.FluidInit;
+import com.xxTFxx.siberianadv.init.ItemInit;
 import com.xxTFxx.siberianadv.tabs.ModTab;
 import com.xxTFxx.siberianadv.tileentity.TileEntityPortableGenerator;
 
 import net.minecraft.block.Block;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
@@ -15,6 +20,8 @@ import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.capability.CapabilityFluidHandler;
 
 public class PortableGeneratorItem extends ItemBlock{
 
@@ -23,29 +30,30 @@ public class PortableGeneratorItem extends ItemBlock{
 		
 		setUnlocalizedName(Main.MOD_ID + "." + name);
 		setRegistryName(name);
-		setCreativeTab(ModTab.Mod_Tab);
+		//setCreativeTab(ModTab.Mod_Tab);
 		
 		setMaxStackSize(1);
+		ItemInit.items.add(this);	
 	}
 	
-	/*@Override
-	public EnumActionResult onItemUse(EntityPlayer player, World worldIn, BlockPos pos, EnumHand hand,
-			EnumFacing facing, float hitX, float hitY, float hitZ) {
-		super.onItemUse(player, worldIn, pos, hand, facing, hitX, hitY, hitZ);
-		ItemStack itemStack = player.getHeldItem(hand);
-		
-		//worldIn.setTileEntity(pos, new TileEntityPortableGenerator());
-		TileEntityPortableGenerator tileEntityPortableGenerator = (TileEntityPortableGenerator)worldIn.getTileEntity(new BlockPos(pos.getX(), pos.getY() + 1 , pos.getZ()));
-		if(itemStack.getSubCompound("Energy") != null)
-		{
-			System.out.println(itemStack.getSubCompound("Energy"));
-			System.out.println(tileEntityPortableGenerator);
 
-			tileEntityPortableGenerator.readFromNBT(itemStack.getSubCompound("Energy"));			
-		}
-			
+	@Override
+	public void addInformation(ItemStack stack, World worldIn, List<String> tooltip, ITooltipFlag flagIn) {
 		
-		return EnumActionResult.SUCCESS;
-	}*/
+		NBTTagCompound nbt = stack.getTagCompound();
+		
+		if(nbt != null)
+		{
+			String infoEnergy;
+			String infoFuel;
+			int energy = nbt.getInteger("Energy");
+			int fuel = nbt.getInteger("Fuel");
+			infoEnergy = "Energy: §3" + Integer.toString(energy);
+			infoFuel = "Fuel: §3" + Integer.toString(fuel);
+			tooltip.add(infoEnergy);
+			tooltip.add(infoFuel);
+		}
+		super.addInformation(stack, worldIn, tooltip, flagIn);
+	}
 	
 }

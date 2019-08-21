@@ -4,7 +4,7 @@ import java.awt.Container;
 
 import com.xxTFxx.siberianadv.Main;
 import com.xxTFxx.siberianadv.container.ContainerElectricFurnace_ITier;
-import com.xxTFxx.siberianadv.tileentity.TileEntityElectricFurnace_ITier;
+import com.xxTFxx.siberianadv.tileentity.TE_ElectricFurnace;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -16,9 +16,9 @@ public class GUIElectricFurnace_ITier extends GuiContainer{
 	
 	private static final ResourceLocation TEXTURES = new ResourceLocation(Main.MOD_ID + ":textures/gui/electric_furnace.png");
 	private final InventoryPlayer player;
-	private final TileEntityElectricFurnace_ITier tileentity;
+	private final TE_ElectricFurnace tileentity;
 	
-	public GUIElectricFurnace_ITier(InventoryPlayer player , TileEntityElectricFurnace_ITier tileentity) {
+	public GUIElectricFurnace_ITier(InventoryPlayer player , TE_ElectricFurnace tileentity) {
 		super(new ContainerElectricFurnace_ITier(player , tileentity));
 		this.tileentity = tileentity;
 		this.player = player;

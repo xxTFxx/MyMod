@@ -35,6 +35,10 @@ public class Main {
 	public static final int GUI_PORTABLE_GENERATOR = 6;
 	public static final int GUI_GRINDER = 7;
 	public static final int GUI_SIMPLEMINER = 8;
+	public static final int GUI_TABLE_SAW = 9;
+	public static final int GUI_PRESS = 10;
+	public static final int GUI_ELECTRIC_ANVIL = 11;
+	public static final int GUI_CONCRETE_MIXER = 12;
 
 	public static Logger logger;
 	

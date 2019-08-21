@@ -18,7 +18,7 @@ import net.minecraftforge.energy.CapabilityEnergy;
 public class Grinder extends RotBlock{
 	
 	public Grinder(String name) {
-		super(Material.IRON, name);
+		super(Material.IRON, name , true);
 	}
 	
 	@Override

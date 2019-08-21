@@ -1,6 +1,6 @@
 package com.xxTFxx.siberianadv.container;
 
-import com.xxTFxx.siberianadv.tileentity.TileEntityElectricFurnace_ITier;
+import com.xxTFxx.siberianadv.tileentity.TE_ElectricFurnace;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -17,11 +17,11 @@ import net.minecraftforge.items.SlotItemHandler;
 
 public class ContainerElectricFurnace_ITier extends Container{
 	
-	private TileEntityElectricFurnace_ITier tileentity;
+	private TE_ElectricFurnace tileentity;
 	private int energy;
 	private int cookTime;
 	
-	public ContainerElectricFurnace_ITier(InventoryPlayer player , TileEntityElectricFurnace_ITier tileentity) {
+	public ContainerElectricFurnace_ITier(InventoryPlayer player , TE_ElectricFurnace tileentity) {
 		this.tileentity = tileentity;
 		
 		IItemHandler handler = tileentity.getCapability(CapabilityItemHandler.ITEM_HANDLER_CAPABILITY, null);

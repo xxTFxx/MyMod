@@ -16,7 +16,7 @@ import net.minecraft.world.World;
 public class SimpleMiner extends RotBlock{
 
 	public SimpleMiner(String name) {
-		super(Material.IRON, name);
+		super(Material.IRON, name , true);
 	}
 	
 	@Override

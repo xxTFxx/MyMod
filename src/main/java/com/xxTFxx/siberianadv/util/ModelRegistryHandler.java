@@ -26,17 +26,29 @@ public class ModelRegistryHandler {
 		registerModel(ItemInit.BEAR_MEAT_COOKED);
 		registerModel(ItemInit.USHANKA);
 		registerModel(ItemInit.IRON_DUST);
-		
+		registerModel(ItemInit.SAWDUST);
+		registerModel(ItemInit.PELLET);
+		registerModel(ItemInit.PORTABLE_GENERATOR);
+
 		registerModel(Item.getItemFromBlock(BlockInit.STALINIUM_BLOCK));
 		registerModel(Item.getItemFromBlock(BlockInit.BARBEDWIRE));
 		registerModel(Item.getItemFromBlock(BlockInit.BARBEDWIREFENCE));
 		registerModel(Item.getItemFromBlock(BlockInit.CUP));
 		registerModel(Item.getItemFromBlock(BlockInit.PHOTOVOLTAICPANEL_BLOCK));
-		registerModel(Item.getItemFromBlock(BlockInit.ELECTRIC_FURNACE_ITIER));
-		registerModel(Item.getItemFromBlock(BlockInit.PORTABLE_GENERATOR));
+		registerModel(Item.getItemFromBlock(BlockInit.ELECTRIC_FURNACE));
+		//registerModel(Item.getItemFromBlock(BlockInit.PORTABLE_GENERATOR));
 		registerModel(Item.getItemFromBlock(BlockInit.GRINDER));
-		registerModel(Item.getItemFromBlock(BlockInit.SIMPLE_GENERATOR));
+		//registerModel(Item.getItemFromBlock(BlockInit.SIMPLE_GENERATOR));
 		registerModel(Item.getItemFromBlock(BlockInit.INDUCTION_FURNACE));
+		registerModel(Item.getItemFromBlock(BlockInit.TABLE_SAW));
+		registerModel(Item.getItemFromBlock(BlockInit.ELECTRIC_ANVIL));
+		registerModel(Item.getItemFromBlock(BlockInit.CEILINGLIGHT));
+		registerModel(Item.getItemFromBlock(BlockInit.WET_CONCRETE));
+		registerModel(Item.getItemFromBlock(BlockInit.CONCRETE));
+		registerModel(Item.getItemFromBlock(BlockInit.CONNECTOR));
+		registerModel(Item.getItemFromBlock(BlockInit.CONCRETE_MIXER));
+
+
 
 	}
 	private static void registerModel(Item item) {
