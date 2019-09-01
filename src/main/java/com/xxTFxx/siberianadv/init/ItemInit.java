@@ -11,6 +11,7 @@ import com.xxTFxx.siberianadv.item.ArmourModel;
 import com.xxTFxx.siberianadv.item.CementBucket;
 import com.xxTFxx.siberianadv.item.CoffeCup;
 import com.xxTFxx.siberianadv.item.CustomFood;
+import com.xxTFxx.siberianadv.item.Debugger;
 import com.xxTFxx.siberianadv.item.ItemBase;
 import com.xxTFxx.siberianadv.item.ItemFuel;
 import com.xxTFxx.siberianadv.item.ItemModRecord;
@@ -57,5 +58,7 @@ public class ItemInit {
 	public static final Item CEMENT_BUCKET = new CementBucket("cement_bucket");
 	
 	public static final Item WIRETOOL = new WireTool("wiretool");
+	
+	public static final Item DEBUGGER = new Debugger("debugger");
 	//public static final PortableGeneratorItem PORTABLE_GENERATOR_ITEM = new PortableGeneratorItem("portable_generator" , ModBlocks.PORTABLE_GENERATOR);
 }

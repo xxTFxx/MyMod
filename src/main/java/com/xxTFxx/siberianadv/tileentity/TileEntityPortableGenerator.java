@@ -9,6 +9,7 @@ import com.xxTFxx.siberianadv.util.ModSoundEvent;
 
 import io.netty.buffer.ByteBuf;
 import net.minecraft.block.state.IBlockState;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -46,6 +47,7 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 	private int ENERGY_GAIN = 100;
 	private int output = 100;
 	private int timer = 0;
+	private int updateTimer = 0; 
 	private boolean isTurned = false;
 	private boolean shouldUpdate = false;
 	
@@ -85,9 +87,14 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 				if(timer % 8 == 0)
 				{
 					world.playSound(world.getClosestPlayer(pos.getX(), pos.getY(), pos.getZ(), 100, true), pos, ModSoundEvent.PORTABLE_GENERATOR, SoundCategory.BLOCKS, 1.0F, 2.0F);
-					
+					timer = 0;
 				}
-				shouldUpdate = true;
+				
+				if(!shouldUpdate)
+				{
+					shouldUpdate = true;					
+				}
+				
 				tank.drain(FLUID_DRAIN, true);
 				storage.addEnergy(ENERGY_GAIN);
 			}
@@ -98,14 +105,22 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 		}
 		if(shouldUpdate)
 		{
-			sendUpdates();
-			shouldUpdate = false;
+			updateTimer++;
+			if(updateTimer == 10)
+			{
+				if(Minecraft.getMinecraft().currentScreen instanceof GUIPortableGenerator)
+				{
+					sendUpdates();
+				}
+				shouldUpdate = false;		
+				updateTimer = 0;
+			}
 		}
 		
-		if(storage.getEnergyStored() > output)
-		{
-			sendEnergy();			
-		}
+
+			
+		
+		sendEnergy();			
 		
 	}
 	
@@ -169,8 +184,9 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 					}
 
 				}
+				markDirty();
 			}
-		sendUpdates();
+		//sendUpdates();
 		}
 	
 	
@@ -286,6 +302,7 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 	public void onDataPacket(NetworkManager net, SPacketUpdateTileEntity pkt) {
 		super.onDataPacket(net, pkt);
 		handleUpdateTag(pkt.getNbtCompound());
+		
 	}
 
 	public void onGuiButtonPress(int id) {
@@ -297,7 +314,7 @@ public class TileEntityPortableGenerator extends TileEntity implements ITickable
 	}
 	
 	private void sendUpdates() {
-		world.markBlockRangeForRenderUpdate(pos, pos);
+		//world.markBlockRangeForRenderUpdate(pos, pos);
 		world.notifyBlockUpdate(pos, getState(), getState(), 3);
 		world.scheduleBlockUpdate(pos,this.getBlockType(),0,0);
 		markDirty();
